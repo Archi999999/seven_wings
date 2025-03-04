@@ -1,0 +1,33 @@
+@import "../../../app/styles/boilerplate";
+
+.sidebar {
+  border-right: $border-style;
+  height: 100%;
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px 8px 20px;
+  border-bottom: $border-style;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  color: var(--light-900);
+}
+
+.title {
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+}
+
+.abbr {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+}
+
+.project_list {
+  padding-left: 17px;
+}
