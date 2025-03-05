@@ -5,11 +5,12 @@
   height: 100%;
 }
 
-.select {
+.accordion   {
   display: flex;
   justify-content: space-between;
   padding: 8px 10px 8px 20px;
   border-bottom: $border-style;
+  gap: 20px;
 }
 
 .label {
@@ -28,6 +29,10 @@
   line-height: var(--line-height-xs);
 }
 
-.project_list {
-  padding-left: 17px;
+//.project_list {
+//  padding: 0 17px;
+//}
+
+.active {
+  background-color: var(--light-900);
 }
