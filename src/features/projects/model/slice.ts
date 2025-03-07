@@ -16,13 +16,22 @@ const projectsSlice = createSlice({
             projectsService.endpoints.updateWorkDetail.matchFulfilled,
             (state, { payload }) => {
                 const updateWorkDetails = (workDetails: IWorkDetail[]) => {
-                    workDetails.forEach((wD) => {
+
+                    for (let i = 0; i < workDetails.length; i++) {
+                        const wD = workDetails[i]
+
+                        const changedItem = payload.changed.find((item) => item.id === wD.id);
+                        if (changedItem) {
+                            workDetails[i] = {...wD, ...changedItem}
+                        }
+
                         if (wD.id === payload.current.id) {
-                            Object.assign(wD, payload.current);
+                            Object.assign(wD, payload.current)
+                            return
                         } else if (wD.child && wD.child.length > 0) {
                             updateWorkDetails(wD.child);
                         }
-                    });
+                    }
                 };
 
                 updateWorkDetails(state);
@@ -38,26 +47,41 @@ const projectsSlice = createSlice({
                 const parentId = meta.arg.originalArgs.workDetail.parentId;
 
                 if (!parentId) {
-                    return [payload.current]
+                    return [{...payload.current, child:[]}]
                 }
 
                 const addWorkDetail = (workDetails: IWorkDetail[]) => {
-                    workDetails.forEach((wD) => {
+                    const newWorkDetail = {...payload.current, child: []}
+                    for (let i = 0; i < workDetails.length; i++) {
+                        const wD = workDetails[i]
+
+                        const changedItem = payload.changed.find((item) => item.id === wD.id);
+                        if (changedItem) {
+                            workDetails[i] = {...wD, ...changedItem}
+                        }
+
                         if (wD.id === parentId) {
-                            wD.child = [...wD.child, payload.current]
+                            workDetails[i].child = [...wD.child, newWorkDetail]
+                            return
                         } else if (wD.child && wD.child.length > 0) {
                             addWorkDetail(wD.child)
                         }
-                    })
+                    }
                 }
                 addWorkDetail(state)
             }
         ).addMatcher(
             projectsService.endpoints.deleteWorkDetail.matchFulfilled,
-            (state, {meta}) => {
+            (state, {meta, payload}) => {
                 const deleteWorkDetail = (workDetails: IWorkDetail[]) => {
                     for (let i = 0; i < workDetails.length; i++) {
                         const wD = workDetails[i]
+
+                        const changedItem = payload.changed.find((item) => item.id === wD.id);
+                        if (changedItem) {
+                            workDetails[i] = {...wD, ...changedItem}
+                        }
+
                         if (wD.id === meta.arg.originalArgs.workDetailId ) {
                             workDetails.splice(i, 1)
                             return

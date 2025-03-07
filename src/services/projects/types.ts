@@ -28,10 +28,17 @@ export interface INewWorkDetail extends Omit<IWorkDetail, 'id' | 'total' | 'chil
     parentId: number | null;
 }
 
-export interface IResUpdateWorkDetail {
+export type IChangedWorkDetail = Omit<IWorkDetail, 'child' >
+
+export interface IResMutationWorkDetail {
     current: IWorkDetail,
-    changed: IWorkDetail[],
+    changed: IChangedWorkDetail[],
 }
+
+export type IDeleteWorkDetailResponse = {
+    current: null;
+    changed: IChangedWorkDetail[];
+};
 
 export interface IDeleteWorkDetail {
     projectId: number,

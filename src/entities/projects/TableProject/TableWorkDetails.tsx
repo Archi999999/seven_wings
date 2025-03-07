@@ -59,7 +59,7 @@ export const TableWorkDetails = ({className, title, projectId}: ITableProject) =
                             <WorkDetailRow key={workDetail.id} workDetail={workDetail} padding={12} projectId={projectId} isFirstElement={i===0}/>
                         ))
                             ): (
-                                <FormWorkDetailRow key={projectId} onSubmit={handleSubmit}/>
+                                projectId ? <FormWorkDetailRow key={projectId} onSubmit={handleSubmit} /> : null
                             )
                         }
                     </Table.Body>
