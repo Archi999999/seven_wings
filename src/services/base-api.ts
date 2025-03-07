@@ -7,5 +7,5 @@ export const baseApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_URL
     }),
-    endpoints: ()=>({})
+    endpoints: ()=>({}),
 })

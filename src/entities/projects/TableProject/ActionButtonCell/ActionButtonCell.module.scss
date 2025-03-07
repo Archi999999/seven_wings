@@ -1,0 +1,23 @@
+.buttons_wrapper {
+    display: flex;
+    gap: 6px;
+    padding: 2px;
+    border-radius: 6px;
+    width: 28px;
+    overflow: hidden;
+    margin-right: 27px;
+    &:hover {
+      width: 55px;
+      background-color: var(--dark-200);
+      margin-right: 0;
+    }
+}
+
+.button {
+  padding: 0;
+}
+
+.icon_trash {
+  width: 16px;
+  height: 16px;
+}

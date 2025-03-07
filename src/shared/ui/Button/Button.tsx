@@ -1,10 +1,10 @@
-import {HTMLAttributes} from "react";
+import {ButtonHTMLAttributes} from "react";
 
 import cn from 'classnames';
 
 import style from './Button.module.scss'
 
-export interface IButton extends  HTMLAttributes<HTMLButtonElement> {
+export interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: 'outline'
 }
 
