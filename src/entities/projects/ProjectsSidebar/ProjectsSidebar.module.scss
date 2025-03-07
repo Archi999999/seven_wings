@@ -1,7 +1,5 @@
-@import "../../../app/styles/boilerplate";
-
 .sidebar {
-  border-right: $border-style;
+  border-right: 1px solid var(--dark-200);
   height: 100%;
 }
 
@@ -9,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   padding: 8px 10px 8px 20px;
-  border-bottom: $border-style;
+  border-bottom: 1px solid var(--dark-200);
   gap: 20px;
 }
 
@@ -28,10 +26,6 @@
   font-size: var(--font-size-xs);
   line-height: var(--line-height-xs);
 }
-
-//.project_list {
-//  padding: 0 17px;
-//}
 
 .active {
   background-color: var(--light-900);

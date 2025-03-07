@@ -16,11 +16,11 @@ interface IFormWorkDetailRow {
     disabledActions?: boolean
 }
 
-export const FormWorkDetailRow = ({className, padding, onSubmit, onCreate, onDelete, workDetail, disabled, disabledActions}: IFormWorkDetailRow) => {
+export const FormWorkDetailRow = ({className, padding, onCreate, onDelete, disabledActions, ...restProps}: IFormWorkDetailRow) => {
     return (
         <Table.Row className={className}>
             <ActionButtonCell onDelete={onDelete} onCreate={onCreate} padding={padding} disabled={disabledActions}/>
-            <FormWorkDetail onSubmit={onSubmit} workDetail={workDetail} disabled={disabled}/>
+            <FormWorkDetail {...restProps}/>
         </Table.Row>
     );
 };

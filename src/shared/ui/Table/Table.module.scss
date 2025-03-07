@@ -1,0 +1,29 @@
+
+.table {
+  border-collapse: collapse;
+  padding: 0 10px;
+}
+
+.thead {
+
+}
+
+.tbody {
+
+}
+
+.row {
+    border-bottom: 1px solid var(--dark-200);
+}
+
+.title_cell {
+  color: var(--light-900);
+  text-align: left;
+}
+
+.cell {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-xs);
+  padding: 16px 12px;
+}
