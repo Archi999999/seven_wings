@@ -63,7 +63,7 @@ export const FormWorkDetail = ({ workDetail, onSubmit, disabled }: IFormWorkDeta
     return (
         <>
             <Table.Cell>
-                <Input {...rowNameField} onKeyDown={handleKeyDown}/>
+                <Input {...rowNameField} onKeyDown={handleKeyDown} disabled={disabled} />
             </Table.Cell>
             <Table.Cell>
                 <Input {...salaryField} onKeyDown={handleKeyDown} type="number" min={0} disabled={disabled} />

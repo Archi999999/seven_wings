@@ -35,7 +35,7 @@ export const TableWorkDetails = ({className, title, projectId}: ITableProject) =
         if (projectId) {
             getWorkDetails(projectId)
         }
-    }, [projectId]);
+    }, [projectId, getWorkDetails]);
 
     return (
         <div className={cn(style.container_table, className)}>
@@ -56,7 +56,7 @@ export const TableWorkDetails = ({className, title, projectId}: ITableProject) =
                     <Table.Body>
                         { workDetails.length > 0 ?
                             (workDetails.map((workDetail, i) => (
-                            <WorkDetailRow key={workDetail.id} workDetail={workDetail} padding={12} projectId={projectId} isFirstElement={i===0}/>
+                            <WorkDetailRow key={workDetail.id} workDetail={workDetail} indentLeft={12} projectId={projectId} isFirstElement={i===0}/>
                         ))
                             ): (
                                 projectId ? <FormWorkDetailRow key={projectId} onSubmit={handleSubmit} /> : null

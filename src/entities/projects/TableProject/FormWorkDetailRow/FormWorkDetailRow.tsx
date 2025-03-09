@@ -7,7 +7,7 @@ import {FormWorkDetail} from "./FormWorkDetail/FormWorkDetail.tsx";
 
 interface IFormWorkDetailRow {
     className?: string
-    padding?: number
+    indentLeft?: number
     onSubmit: (workDetail: IWorkDetail) => void
     onCreate?: () => void
     onDelete?: () => void
@@ -16,10 +16,10 @@ interface IFormWorkDetailRow {
     disabledActions?: boolean
 }
 
-export const FormWorkDetailRow = ({className, padding, onCreate, onDelete, disabledActions, ...restProps}: IFormWorkDetailRow) => {
+export const FormWorkDetailRow = ({className, indentLeft, onCreate, onDelete, disabledActions, ...restProps}: IFormWorkDetailRow) => {
     return (
         <Table.Row className={className}>
-            <ActionButtonCell onDelete={onDelete} onCreate={onCreate} padding={padding} disabled={disabledActions}/>
+            <ActionButtonCell onDelete={onDelete} onCreate={onCreate} indentLeft={indentLeft} disabled={disabledActions}/>
             <FormWorkDetail {...restProps}/>
         </Table.Row>
     );

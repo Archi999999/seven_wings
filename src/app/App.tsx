@@ -2,9 +2,9 @@ import {Provider} from "react-redux";
 
 import {ProjectsOverview} from "../pages/ProjectsOverview/ProjectsOverview";
 
-import {store} from "./store/store.ts";
-
 import 'typeface-roboto';
+
+import {store} from "./store/store.ts";
 
 import './styles/index.scss'
 

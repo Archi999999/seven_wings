@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 
 import {
     useDeleteWorkDetailMutation,
@@ -7,24 +7,25 @@ import {
 import {IWorkDetail} from "../../../../services/projects/types.ts";
 import {useFetchCreateWorkDetail} from "../../../../services/projects/utils/useFetchCreateWorkDetail.ts";
 import {Table} from "../../../../shared/ui/Table/Table.tsx";
+import {countTotalHeight} from "../../common/utils/countTotalHeigt.ts";
 import {ActionButtonCell} from "../ActionButtonCell/ActionButtonCell.tsx";
 import {FormWorkDetailRow} from "../FormWorkDetailRow/FormWorkDetailRow.tsx";
 
 interface IWorkDetailRow {
     className?: string
     workDetail: IWorkDetail
-    padding: number
+    indentLeft: number
     projectId: number
     isFirstElement?: boolean
 }
 
-export const WorkDetailRow = ({className, workDetail, padding, projectId, isFirstElement}: IWorkDetailRow) => {
+export const WorkDetailRow = ({className, workDetail, indentLeft, projectId, isFirstElement }: IWorkDetailRow) => {
     const [isEditing, setIsEditing] = useState(false);
     const [isCreate, setIsCreate] = useState(false);
 
-    const [fetchUpdateWorkDetail] = useUpdateWorkDetailMutation()
-    const [fetchDeleteWorkDetail] = useDeleteWorkDetailMutation()
-    const { fetchCreateWorkDetail } = useFetchCreateWorkDetail()
+    const [fetchUpdateWorkDetail, {isLoading: isFetchingUpdate}] = useUpdateWorkDetailMutation()
+    const [fetchDeleteWorkDetail, {isLoading: isFetchingDelete}] = useDeleteWorkDetailMutation()
+    const { fetchCreateWorkDetail, isLoading: isFetchingCreate } = useFetchCreateWorkDetail()
 
     const handleSubmit = (workDetail: IWorkDetail) => {
         fetchUpdateWorkDetail({workDetail, projectId})
@@ -44,6 +45,8 @@ export const WorkDetailRow = ({className, workDetail, padding, projectId, isFirs
         setIsEditing(true);
     };
 
+    const totalHeight = countTotalHeight(workDetail, isCreate)
+
     return (
         <>
             {isEditing ? (
@@ -51,13 +54,23 @@ export const WorkDetailRow = ({className, workDetail, padding, projectId, isFirs
                     workDetail={workDetail}
                     onDelete={()=>setIsEditing(false)}
                     onSubmit={handleSubmit}
-                    disabled={isFirstElement}
                     disabledActions
-                    padding={padding}
+                    indentLeft={indentLeft}
+                    disabled={isFetchingUpdate}
                 />
             ): (
                 <Table.Row className={className} onDoubleClick={handleDoubleClick}>
-                    <ActionButtonCell onCreate={()=>setIsCreate(true)} onDelete={handleRemoveWorkDetail} padding={padding} disabled={isCreate}/>
+                    <ActionButtonCell
+                        onCreate={()=>setIsCreate(true)}
+                        onDelete={handleRemoveWorkDetail}
+                        indentLeft={indentLeft}
+                        isFirstElement={isFirstElement}
+                        disabled={isCreate
+                            || isFetchingDelete
+                            || isFetchingCreate
+                    }
+                        totalHeight={totalHeight}
+                    />
                     <Table.Cell>{workDetail.rowName}</Table.Cell>
                     <Table.Cell>{workDetail.salary}</Table.Cell>
                     <Table.Cell>{workDetail.equipmentCosts}</Table.Cell>
@@ -67,11 +80,11 @@ export const WorkDetailRow = ({className, workDetail, padding, projectId, isFirs
             )
             }
             {isCreate &&
-              <FormWorkDetailRow onSubmit={handleCreateWorkDetail} onDelete={()=>setIsCreate(false)} padding={padding + 20}/>
+              <FormWorkDetailRow onSubmit={handleCreateWorkDetail} onDelete={()=>setIsCreate(false)} indentLeft={indentLeft + 20}/>
             }
             {workDetail.child && workDetail.child.length > 0 && (
                 workDetail.child.map(child => (
-                    <WorkDetailRow key={child.id} workDetail={child} padding={padding + 20} projectId={projectId} />
+                    <WorkDetailRow key={child.id} workDetail={child} indentLeft={indentLeft + 20} projectId={projectId} />
                 ))
             )}
         </>
