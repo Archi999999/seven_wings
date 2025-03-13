@@ -15,7 +15,7 @@ interface IActionButtonCell {
     isFirstElement?: boolean
 }
 
-export const ActionButtonCell = ({ indentLeft = 0, onCreate, onDelete, disabled, totalHeight, isFirstElement}: IActionButtonCell) => {
+export const ActionButtonCell = ({ indentLeft = 12, onCreate, onDelete, disabled, totalHeight, isFirstElement}: IActionButtonCell) => {
     return (
         <Table.Cell style={{paddingLeft: indentLeft}} onDoubleClick={e=> e.stopPropagation()} className={style.cell}>
             <div className={style.buttons_wrapper} >

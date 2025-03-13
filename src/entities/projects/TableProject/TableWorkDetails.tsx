@@ -25,17 +25,17 @@ export const TableWorkDetails = ({className, title, projectId}: ITableProject) =
     const [getWorkDetails] = useLazyGetWorkDetailsByIdQuery();
     const { fetchCreateWorkDetail } = useFetchCreateWorkDetail()
 
-    const workDetails = useSelector((state:RootState):IWorkDetail[] => state.projectSlice)
-
-    const handleSubmit = (data: IWorkDetail) => {
-        fetchCreateWorkDetail({data, projectId})
-    }
-
     useEffect(() => {
         if (projectId) {
             getWorkDetails(projectId)
         }
     }, [projectId, getWorkDetails]);
+
+    const workDetails = useSelector((state:RootState):IWorkDetail[] => state.projectSlice)
+
+    const handleSubmit = (data: IWorkDetail) => {
+        fetchCreateWorkDetail({data, projectId})
+    }
 
     return (
         <div className={cn(style.container_table, className)}>
@@ -59,7 +59,7 @@ export const TableWorkDetails = ({className, title, projectId}: ITableProject) =
                             <WorkDetailRow key={workDetail.id} workDetail={workDetail} indentLeft={12} projectId={projectId} isFirstElement={i===0}/>
                         ))
                             ): (
-                                projectId ? <FormWorkDetailRow key={projectId} onSubmit={handleSubmit} /> : null
+                                projectId ? <FormWorkDetailRow key={projectId} onSubmit={handleSubmit} isFirstElement/> : null
                             )
                         }
                     </Table.Body>

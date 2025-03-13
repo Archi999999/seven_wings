@@ -4,7 +4,7 @@ import {IWorkDetail} from "../../../../services/projects/types.ts";
 export const countTotalHeight = (workDetail: IWorkDetail, isCreate: boolean) => {
 
     const countHeightChilds = (workDetails: IWorkDetail[], isCreate: boolean): number => {
-        const baseHeight = 53;
+        const baseHeight = 54;
         return workDetails.reduce((totalHeight, workDetail) => {
             const childHeight = countHeightChilds(workDetail.child, isCreate);
             return totalHeight + childHeight + 7 ;

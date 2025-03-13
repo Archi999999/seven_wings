@@ -14,12 +14,13 @@ interface IFormWorkDetailRow {
     workDetail?: IWorkDetail
     disabled?: boolean
     disabledActions?: boolean
+    isFirstElement?: boolean
 }
 
-export const FormWorkDetailRow = ({className, indentLeft, onCreate, onDelete, disabledActions, ...restProps}: IFormWorkDetailRow) => {
+export const FormWorkDetailRow = ({className, indentLeft, onCreate, onDelete, disabledActions, isFirstElement, ...restProps}: IFormWorkDetailRow) => {
     return (
         <Table.Row className={className}>
-            <ActionButtonCell onDelete={onDelete} onCreate={onCreate} indentLeft={indentLeft} disabled={disabledActions}/>
+            <ActionButtonCell onDelete={onDelete} onCreate={onCreate} indentLeft={indentLeft} disabled={disabledActions} isFirstElement={isFirstElement}/>
             <FormWorkDetail {...restProps}/>
         </Table.Row>
     );
